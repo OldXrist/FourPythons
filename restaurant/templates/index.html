@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section>
+    <article id="hero">
+      <h1 class="heading_shadow">СПЕЦ ПРЕДЛОЖЕНИЕ</h1>
+      <p>
+        30% На Этих Выходных
+      </p>
+      <a href="menu/" class="cta"> В меню </a>
+      <a href="book/" class="cta"> Бронь </a>
+    </article>
+  </section>
+  <section>
+    <article>
+      <h2>Новое Меню</h2>
+      <img src="{% static 'img/grill.jpg' %}">
+      <p>
+        Наше меню состоит из 12-15 сезонных блюд, основанных на культуре Южной Индии.
+      </p>
+      <p>
+        <a href="{% url 'menu' %}">Посмотреть новое меню</a>
+      </p>
+    </article>
+    <article>
+      <h2>Заказать столик</h2>
+      <img src="{% static 'img/salad.jpg' %}">
+      <p>
+        Забронируйте свой столик для гастрономического путешествия по Южной Индии.
+      </p>
+      <p>
+        <a href="{% url 'book' %}">Забронируйте сейчас</a>
+      </p>
+    </article>
+    <article>
+      <h2>Часы работы</h2>
+      <img src="{% static 'img/head_chef.jpg' %}">
+      <p>
+        The Four Pythons Restaurant работает 7 дней в неделю.
+      </p>
+      <ul>
+        <li>Пн - Вс: 10:00 - 9:00</li>
+      </ul>
+    </article>
+  </section>
+{% endblock %}

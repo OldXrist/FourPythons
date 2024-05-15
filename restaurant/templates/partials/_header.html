@@ -1,0 +1,12 @@
+{% load static %}
+<header>
+    <a href="{% url 'home' %}" style="color: black; text-align: center"><h1>Four Pythons Restaurant</h1></a>
+</header>
+<nav>
+  <ul>
+    <li><a href="{% url 'home' %}">Главная</a></li>
+    <li><a href="{% url 'about' %}">О нас</a></li>
+    <li><a href="{% url 'menu' %}">Меню</a></li>
+    <li><a href="{% url 'book' %}">Забронировать</a></li>
+  </ul>
+</nav>

@@ -1,0 +1,36 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+<section>
+   <article style="padding-top: 1rem">
+      <span>
+         <a href="{% url 'home' %}">Главная</a> /
+         <a href="{% url 'menu' %}">Меню</a>/
+         {{menu_item.name}}
+      </span>
+      <!--Begin row-->
+      <div class="row">
+         <!--Begin col-->
+         <div class="column">
+            <h2>
+                {{ menu_item.name }}
+            </h2>
+            <p>
+                {{ menu_item.menu_item_description }}
+            </p>
+            <p>
+                Цена: ₽ {{ menu_item.price }}.00
+            </p>
+         </div>
+         <!--End col-->
+         <!--Begin col-->
+         <div class="column">
+            <img src="/restaurant/static/img/menu_items/{{menu_item.name}}.jpg" alt="{{ menu_item.name}}" />
+            
+        </div>
+         <!--End col-->
+      </div>
+      <!--End row-->
+   </article>
+</section>
+{% endblock %}
