@@ -1,19 +1,28 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<h1>Меню</h1>
+    
 <!--Begin col-->
-<div class="column">
+<div class="container">
+    <h1>Меню</h1>
+    <div class="d-flex flex-wrap">
     {% for item in menu.menu %}
-    <p>
-        <a href="{% url 'menu_item' pk=item.pk %}">
-            {{ item.name }}
-            </a>
-        <span class="menu-price">
-            ₽ {{ item.price }}.00
-        </span>
-    </p>
+      <div class="card shadow-sm">
+                <img src="/restaurant/static/img/menu_items/{{item.name}}.jpg" alt="{{ menu_item.name}}" />
+                <div class="card-body">
+                        <div class="menu-item-btns">
+                            <a href="{% url 'menu_item' pk=item.pk %}">
+                                {{ item.name }}
+                            </a>
+                            {% if user.is_authenticated %}
+                            <a class="btn btn-success to-cart-btn" href="{% url 'add_to_cart' item.id %}">В Корзину</a>
+                            {% endif %}
+                        </div>
+                    <p>₽{{ item.price }}</p>
+                </div>
+      </div>
     {% endfor %}
+    </div>
 </div>
 <!--End col-->
 {% endblock %}

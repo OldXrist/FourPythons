@@ -9,4 +9,10 @@ urlpatterns = [
     path('book/', views.book, name="book"), 
     path('menu/', views.menu, name="menu"),
     path('menu_item/<int:pk>/', views.display_menu_item, name="menu_item"),
+    path('register/', views.register, name="register"),
+    path('login/', views.log_in, name='login'),
+    path('logout/', views.log_out, name='logout'),
+    path('cart/', views.view_cart, name='view_cart'),
+    path('add/<int:product_id>/', views.add_to_cart, name='add_to_cart'),
+    path('remove/<int:item_id>/', views.remove_from_cart, name='remove_from_cart'),
 ]

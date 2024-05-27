@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section>
+    <div class="cart">
+    <h2>Корзина</h2>
+    {% for item in cart_items %}
+        <div class="cart_item">
+        <img src="/restaurant/static/img/menu_items/{{item.product.name}}.jpg" alt=""/>
+            <div class="cart_item_text">
+                <h5>{{ item.product.name }}</h5>
+                <div class="cart_item_price">
+                    <p>x{{ item.quantity }}</p>
+                    <p>₽{{ item.product.price }}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="order-section">
+        <h3 class="total_price" style="padding-top: 20px;">Итого: ₽{{ total_price }}</h3>
+        <a class="btn btn-success order-button">Заказать</a>
+    </div>
+    </div>
+    </section>
+{% endblock %}

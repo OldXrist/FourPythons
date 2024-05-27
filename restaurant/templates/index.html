@@ -2,6 +2,13 @@
 {% load static %}
 
 {% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'success' %}{{ message.tags }}{% else %}danger{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
 <section>
     <article id="hero">
       <h1 class="heading_shadow">СПЕЦ ПРЕДЛОЖЕНИЕ</h1>
@@ -17,7 +24,7 @@
       <h2>Новое Меню</h2>
       <img src="{% static 'img/grill.jpg' %}">
       <p>
-        Наше меню состоит из 12-15 сезонных блюд, основанных на культуре Южной Индии.
+        Наше меню состоит из сезонных блюд, основанных на культуре Южной Индии.
       </p>
       <p>
         <a href="{% url 'menu' %}">Посмотреть новое меню</a>
@@ -37,10 +44,10 @@
       <h2>Часы работы</h2>
       <img src="{% static 'img/head_chef.jpg' %}">
       <p>
-        The Four Pythons Restaurant работает 7 дней в неделю.
+        The Four Seasons Restaurant работает 7 дней в неделю.
       </p>
       <ul>
-        <li>Пн - Вс: 10:00 - 9:00</li>
+        <li>Пн - Вс: 10:00 - 23:00</li>
       </ul>
     </article>
   </section>

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section>
+<form method="POST" novalidate>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'success' %}{{ message.tags }}{% else %}danger{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+	{% csrf_token %}
+	<h2>Вход</h2>
+	{{form.as_div}}
+	<input type="submit" value="Войти" />
+</form>
+</section>
+{% endblock %}

@@ -27,6 +27,17 @@ h2 {
 p, ul{
     font-size: 1.25rem;;
 }
+.card img{
+    height: 70%;
+}
+.btn-group a {
+    color: #EE9972;
+    text-decoration: none;
+}
+
+.btn-group a:hover {
+    text-decoration: none;
+}
 
 a {
     color: #EE9972;
@@ -51,12 +62,14 @@ nav {
     margin-top: 1rem;
     margin-bottom: 1rem;
     margin-bottom: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 nav ul {
     list-style: none;
     font-size: 1.5rem;
-    text-align: center;
     padding-inline-start: 0rem;
     margin-bottom: 0px;
 }
@@ -78,6 +91,73 @@ nav ul a:active {
 nav ul a:hover {
     text-decoration: underline;
     text-decoration-thickness: 0.1rem;
+}
+
+.user_buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    padding-right: 0.5rem;
+}
+
+.user_buttons a {
+    color: #EDEFEE;
+    font-size: 1.5rem;
+}
+
+.user_buttons a img {
+    height: 40px;
+}
+
+.user_buttons a:hover {
+    text-decoration: underline;
+}
+
+.cart {
+    width: 100%;
+}
+
+.cart_item {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    border: 1px solid #EDEFEE;
+    margin-bottom: 5px;
+}
+
+.cart_item img {
+    max-height: 100px;
+}
+
+.cart_item_text {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 0 30px;
+    justify-content: space-between;
+}
+
+.cart_item_price {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.order-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.order-section a {
+    min-width: 200px;
+}
+
+.menu-item-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 section {
@@ -233,6 +313,29 @@ footer p {
 .menu-price{
     display: block;
     font-size: 1rem;
+}
+.card{
+    min-height: 250px;
+    width: 32%;
+    margin-left: 1%;
+    margin-bottom: 1%;
+}
+.card-body{
+    font-size: 16pt;
+}
+
+.social {display: inline-block;}
+.social a {
+	display: block;
+	width: 48px;
+	height: 48px;
+	margin: 0 10px 10px 0;
+	text-align: center;
+	color: #000;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-radius: 24px;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.15), inset 0 0 50px rgba(0,0,0,0.1);
 }
 
 @media (max-width: 800px) {
