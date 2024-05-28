@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section>
+    <div class="account">
+    <h2>Личный кабинет, {{ user.username }}</h2>
+    <div class="account_info">
+        <div class="my_orders">
+            <h3>Мои Заказы</h3>
+            {% if orders %}
+                {% for order in orders %}
+                    <div class="order_card">
+                    <span>Заказ {{ order.id }}</span>
+                    <span>₽ {{ order.total }}</span>
+                    </div>
+                    <a href="{% url 'order_detail' order.id %}">Подробнее...</a>
+                {% endfor %}
+            {% else %}
+                <p style="text-align: center;">Заказов нет</p>
+            {% endif %}
+        </div>
+        <div class="my_cart">
+            <h3>Моя Корзина</h3>
+            {% if cart %}
+                {% for item in cart %}
+                    <div class="cart_card">
+                        <span>{{ item.product.name }} x{{ item.quantity }}</span>
+                        <span>₽ {{ item.product.price }}</span>
+                    </div>
+                {% endfor %}
+                <a style="width: 100%; margin-top: 100%;" href="{% url 'view_cart' %}" class="btn btn-success">Заказать</a>
+            {% else %}
+                <p style="text-align: center;">Корзина пуста.</p>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+    </section>
+{% endblock %}

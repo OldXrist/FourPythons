@@ -3,9 +3,9 @@
 
 {% block content %}
     <section>
-    <form method="post" action="{% url 'order_create' %}" class="cart">
+    <div class="cart">
     {% csrf_token %}
-    <h2>Корзина</h2>
+    <h2>Заказ #{{ order.id }}</h2>
     {% if cart_items %}
         {% for item in cart_items %}
             <div class="cart_item">
@@ -13,23 +13,22 @@
                 <div class="cart_item_text">
                     <h5>{{ item.product.name }}</h5>
                     <div class="cart_item_price">
-                        <p>₽{{ item.product.price }} x{{ item.quantity }}</p>
-                        <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger">Удалить</a>
+                        <p>x{{ item.quantity }}</p>
+                        <p>₽{{ item.product.price }}</p>
                     </div>
                 </div>
             </div>
         {% endfor %}
         <label for="address">
             Адрес доставки
-            <input style="width: 100%;" name="address" type="text" placeholder="Введите адрес доставки" required/>
+            <input style="width: 100%;" name="address" type="text" value="{{ order.address }}" readonly disabled/>
         </label>
         <div class="order-section">
             <h3 class="total_price" style="padding-top: 20px;">Итого: ₽{{ total_price }}</h3>
-            <button type="submit" class="btn btn-success order-button">Заказать</button>
         </div>
     {% else %}
-        <p style="text-align: center;">Ваша корзина пуста.</p>
+        <p style="text-align: center;">Заказов нет.</p>
     {% endif %}
-    </form>
+    </div>
     </section>
 {% endblock %}

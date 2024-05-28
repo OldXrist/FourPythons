@@ -11,7 +11,7 @@
     <div class="user_buttons">
         {% if user.is_authenticated %}
         <a href="{% url 'logout' %}">Выйти</a>
-        <a href="#"><img src="https://cdn-icons-png.freepik.com/512/2102/2102647.png?ga=GA1.1.1606849930.1666291229" alt="user"/></a>
+        <a href="{% url 'account' user.username %}"><img src="https://cdn-icons-png.freepik.com/512/2102/2102647.png?ga=GA1.1.1606849930.1666291229" alt="user"/></a>
         <a href="{% url 'view_cart' %}"><img src="https://cdn-icons-png.freepik.com/512/1170/1170678.png?ga=GA1.1.1606849930.1666291229" alt=""/></a>
         {% else %}
         <a href="{% url 'login' %}">Вход</a>

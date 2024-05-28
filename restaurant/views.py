@@ -3,16 +3,16 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import BookingForm, LoginForm, RegisterForm
-from .models import Menu, CartItem
+from .models import Menu, CartItem, Order, OrderDetail
 
 
-
-# Create your views here.
 def home(request):
     return render(request, 'index.html')
 
+
 def about(request):
     return render(request, 'about.html')
+
 
 def book(request):
     form = BookingForm()
@@ -25,12 +25,11 @@ def book(request):
 
 # Add your code here to create new views
 
-#Menu Function
+
 def menu(request):
     menu_data = Menu.objects.all()
     main_data = {"menu": menu_data}
     return render(request, 'menu.html', {"menu": main_data})
-
 
 
 def display_menu_item(request, pk=None): 
@@ -75,11 +74,11 @@ def log_in(request):
             user = authenticate(request, username=username, password=password)
             if user:
                 login(request, user)
-                messages.success(request, f'Hi {username.title()}, welcome back!')
+                messages.success(request, f'Добро пожаловать, {username.title()}!')
                 return redirect('home')
 
         # form is not valid or user is not authenticated
-        messages.error(request, f'Invalid username or password')
+        messages.error(request, f'Некорректное имя пользователя или пароль!')
         return render(request, 'login.html', {'form': form})
 
 
@@ -106,4 +105,44 @@ def add_to_cart(request, product_id):
 def remove_from_cart(request, item_id):
     cart_item = CartItem.objects.get(id=item_id)
     cart_item.delete()
-    return redirect('cart')
+    return redirect('view_cart')
+
+
+def order_create(request):
+    if request.method == 'POST':
+        cart_items = CartItem.objects.filter(user=request.user)
+        total_price = sum(item.product.price * item.quantity for item in cart_items)
+        address = request.POST['address']
+
+        order, created = Order.objects.get_or_create(user=request.user, total=total_price, address=address)
+        order.save()
+
+        for item in cart_items:
+            order_detail, created = OrderDetail.objects.get_or_create(order=order, product=item.product, quantity=item.quantity)
+            order_detail.save()
+
+        cart_items.delete()
+
+        messages.success(request, 'Ваш заказ принят!')
+        return redirect('home')
+    else:
+        return redirect('home')
+
+
+def account(request, username):
+    orders = Order.objects.filter(user=request.user)
+    cart = CartItem.objects.filter(user=request.user)
+
+    context = {
+        "orders": orders,
+        "cart": cart,
+    }
+
+    return render(request, 'account.html', context)
+
+
+def order_detail(request, order_id):
+    cart_items = CartItem.objects.filter(user=request.user)
+    order = Order.objects.filter(user=request.user)[0]
+    total_price = sum(item.product.price * item.quantity for item in cart_items)
+    return render(request, 'order.html', {'cart_items': cart_items, 'total_price': total_price, 'order': order})
