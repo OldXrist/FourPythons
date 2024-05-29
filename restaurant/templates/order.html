@@ -6,8 +6,7 @@
     <div class="cart">
     {% csrf_token %}
     <h2>Заказ #{{ order.id }}</h2>
-    {% if cart_items %}
-        {% for item in cart_items %}
+        {% for item in detail %}
             <div class="cart_item">
             <img src="/restaurant/static/img/menu_items/{{item.product.name}}.jpg" alt=""/>
                 <div class="cart_item_text">
@@ -26,9 +25,6 @@
         <div class="order-section">
             <h3 class="total_price" style="padding-top: 20px;">Итого: ₽{{ total_price }}</h3>
         </div>
-    {% else %}
-        <p style="text-align: center;">Заказов нет.</p>
-    {% endif %}
     </div>
     </section>
 {% endblock %}

@@ -142,7 +142,7 @@ def account(request, username):
 
 
 def order_detail(request, order_id):
-    cart_items = CartItem.objects.filter(user=request.user)
-    order = Order.objects.filter(user=request.user)[0]
-    total_price = sum(item.product.price * item.quantity for item in cart_items)
-    return render(request, 'order.html', {'cart_items': cart_items, 'total_price': total_price, 'order': order})
+    order = Order.objects.get(id=order_id)
+    detail = OrderDetail.objects.filter(order=order)
+    total_price = sum(item.product.price * item.quantity for item in detail)
+    return render(request, 'order.html', {'detail': detail, 'total_price': total_price, 'order': order})
