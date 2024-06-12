@@ -1,0 +1,34 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+<section style="display: flex; flex-direction: column;">
+    <h1>Отзывы</h1>
+    <article style="padding-top: 1rem">
+    <div class="leave_review">
+    <h2>Оставить отзыв</h2>
+    {% if user.is_authenticated %}
+        <form action="{% url 'review_add' %}" method="post" style="display: flex; flex-direction: column; gap: 15px;">
+            {% csrf_token %}
+            <textarea style="min-height: 200px; width: 60%;" name="review_text" placeholder="Напишите отзыв..."></textarea>
+            <button class="btn btn-success" style="width: 150px;">Отправить</button>
+        </form>
+    {% else %}
+        <p class="text-danger">Чтобы оставить отзыв сначата войдите или зарегистрируйтесь!</p>
+    {% endif %}
+    </div>
+    <div class="reviews" style="margin-top: 15px;">
+        {% if reviews %}
+            {% for review in reviews %}
+                <div class="review">
+                <h3>{{ review.user.username }}</h3>
+                <span>{{ review.review_date }}</span>
+                <p>{{ review.review }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h2>Отзывов пока нет</h2>
+        {% endif %}
+    </div>
+    </article>
+</section>
+{% endblock %}

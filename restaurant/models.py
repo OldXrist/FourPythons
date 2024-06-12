@@ -51,3 +51,12 @@ class OrderDetail(models.Model):
 
     def __str__(self):
         return f'Order #{self.order.id}, {self.product.name} x{self.quantity}'
+
+
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    review_date = models.DateTimeField(auto_now_add=True)
+    review = models.TextField(max_length=500)
+
+    def __str__(self):
+        return f'{User.username}'

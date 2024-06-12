@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import BookingForm, LoginForm, RegisterForm
-from .models import Menu, CartItem, Order, OrderDetail
+from .models import Menu, CartItem, Order, OrderDetail, Review
 
 
 def home(request):
@@ -146,3 +146,14 @@ def order_detail(request, order_id):
     detail = OrderDetail.objects.filter(order=order)
     total_price = sum(item.product.price * item.quantity for item in detail)
     return render(request, 'order.html', {'detail': detail, 'total_price': total_price, 'order': order})
+
+
+def review_show(request):
+    reviews = Review.objects.all()
+    return render(request, 'reviews.html', {'reviews': reviews})
+
+
+def review_add(request):
+    review, created = Review.objects.get_or_create(user=request.user, review=request.POST['review_text'])
+    review.save()
+    return redirect('reviews')
