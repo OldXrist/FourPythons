@@ -154,6 +154,22 @@ def review_show(request):
 
 
 def review_add(request):
-    review, created = Review.objects.get_or_create(user=request.user, review=request.POST['review_text'])
-    review.save()
-    return redirect('reviews')
+    if request.POST.get('rating1', False):
+        rating = 1
+    elif request.POST.get('rating2', False):
+        rating = 2
+    elif request.POST.get('rating3', False):
+        rating = 3
+    elif request.POST.get('rating4', False):
+        rating = 4
+    elif request.POST.get('rating5', False):
+        rating = 5
+    else:
+        rating = None
+
+    if rating is not None:
+        review, created = Review.objects.get_or_create(user=request.user, review=request.POST['review_text'], rating=rating)
+        review.save()
+        return redirect('reviews')
+    else:
+        return redirect('reviews')
